@@ -197,10 +197,9 @@ py main.py
 
 1. 기존 저장소의 `main.py`, `quiz.py`, `quiz_game.py`, `README.md`, `state.json`을 별도 폴더에 백업합니다.
 2. 새 Python 파일 3개와 `README.md`, `.gitignore`를 프로젝트 폴더에 저장합니다.
-3. 기존 우주 퀴즈의 `state.json`은 이름을 바꾸어 보관하고 새 프로그램을 실행해 새 파일을 생성합니다.
-4. `py main.py`로 기능을 실제 테스트하고 출력 화면을 캡처합니다.
-5. `git status`, `git log`, `git branch -a`로 실제 Git 상태를 확인합니다.
-6. 제출 요구사항에 맞는 경우에만 변경 파일을 커밋하고 GitHub에 push합니다.
+3. `py main.py`로 기능을 실제 테스트하고 출력 화면을 캡처합니다.
+4. `git status`, `git log`, `git branch -a`로 실제 Git 상태를 확인합니다.
+5. 제출 요구사항에 맞는 경우에만 변경 파일을 커밋하고 GitHub에 push합니다.
 
 GitHub 저장소: https://github.com/duly-208129/mission2
 
