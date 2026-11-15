@@ -1,0 +1,22 @@
+테스트 3: 새 프로세스에서 최고 점수 및 기록 조회
+실행 시각: 2026-11-15T15:10:05.622967+09:00
+작업 폴더: C:\Users\k'\AppData\Local\Temp\k_history_quiz__2nef4gr
+PS> C:\Users\k'\AppData\Local\Python\pythoncore-3.15-64\python.exe main.py
+표준 입력(줄 순서): '5\n6\n7\n'
+
+=== K-History Quiz Adventure ===
+1. 퀴즈 풀기  2. 문제 추가  3. 문제 목록  4. 문제 삭제
+5. 최고 점수  6. 게임 기록  7. 종료
+선택: 최고 점수: 100
+
+=== K-History Quiz Adventure ===
+1. 퀴즈 풀기  2. 문제 추가  3. 문제 목록  4. 문제 삭제
+5. 최고 점수  6. 게임 기록  7. 종료
+선택: {'played_at': '2026-11-15 15:10:05', 'category': '역사', 'level': '초급', 'questions': 1, 'correct': 1, 'score': 100}
+
+=== K-History Quiz Adventure ===
+1. 퀴즈 풀기  2. 문제 추가  3. 문제 목록  4. 문제 삭제
+5. 최고 점수  6. 게임 기록  7. 종료
+선택: 종료합니다.
+
+종료 코드: 0

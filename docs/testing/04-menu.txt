@@ -1,0 +1,12 @@
+테스트 1: 메뉴 표시 및 종료
+실행 시각: 2026-11-15T15:10:05.408375+09:00
+작업 폴더: C:\Users\k'\AppData\Local\Temp\k_history_quiz__2nef4gr
+PS> C:\Users\k'\AppData\Local\Python\pythoncore-3.15-64\python.exe main.py
+표준 입력(줄 순서): '7\n'
+
+=== K-History Quiz Adventure ===
+1. 퀴즈 풀기  2. 문제 추가  3. 문제 목록  4. 문제 삭제
+5. 최고 점수  6. 게임 기록  7. 종료
+선택: 종료합니다.
+
+종료 코드: 0
