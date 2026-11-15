@@ -1,0 +1,7 @@
+PASS: 메뉴 표시 및 종료
+PASS: 정답 채점 100점
+PASS: 재실행 후 최고 점수 및 기록 유지
+PASS: 추가 후 JSON 13문제
+PASS: 삭제 후 JSON 12문제
+PASS: 원본 state.json SHA-256 동일
+SHA-256: ddd0209a2d1159c447fd97b4fd6445b476e98b278c9d5e90d14d149974ab7447
