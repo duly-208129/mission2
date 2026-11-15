@@ -1,0 +1,48 @@
+**********************
+Windows PowerShell transcript start
+Start time: 20261115213753
+Username: DESKTOP-H013KFF\k'
+RunAs User: DESKTOP-H013KFF\k'
+Configuration Name:
+Machine: DESKTOP-H013KFF (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File docs/git-evidence/collect.ps1
+Process ID: 18172
+PSVersion: 5.1.26100.9818
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9818
+BuildVersion: 10.0.26100.9818
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\k'\mission2\k_history_quiz\docs\git-evidence\commands.txt
+PS> git clone --branch master https://github.com/duly-208129/mission2.git C:\Users\k'\mission2\k_history_quiz\docs\git-evidence\remote-checkout-20261115-213753
+Cloning into 'C:\Users\k'\mission2\k_history_quiz\docs\git-evidence\remote-checkout-20261115-213753'...
+PS> git -C C:\Users\k'\mission2\k_history_quiz\docs\git-evidence\remote-checkout-20261115-213753 pull --ff-only origin master
+From https://github.com/duly-208129/mission2
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+PS> git -C C:\Users\k'\mission2\k_history_quiz\docs\git-evidence\remote-checkout-20261115-213753 branch -a
+* master
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+  remotes/origin/master
+PS> git -C C:\Users\k'\mission2\k_history_quiz\docs\git-evidence\remote-checkout-20261115-213753 log --all --oneline --decorate --graph
+* a5bfa8d (HEAD -> master, origin/master) docs: update README
+ \
+  * 1ac39f4 Remove obsolete space quiz backup instructions and reset history data
+* 08dfd23 (origin/main, origin/HEAD) Remove obsolete space quiz backup instructions and reset history data
+* f1003f0 docs: add local test commands, results and captures to README section 8.3
+* 96bacec Finalize K-History Kids Adventure project
+* 56b9ed1 Project Init
+PS> git -C C:\Users\k'\mission2\k_history_quiz\docs\git-evidence\remote-checkout-20261115-213753 rev-list --count origin/master
+2
+PS> git -C C:\Users\k'\mission2\k_history_quiz\docs\git-evidence\remote-checkout-20261115-213753 rev-list --count origin/main
+4
+PS> git log --all --merges --oneline
+(no merge commits)
+**********************
+Windows PowerShell transcript end
+End time: 20261115213756
+**********************
