@@ -123,3 +123,5 @@ py docs/testing/test_requirements.py
 `init`은 저장소 초기화, `add`는 변경 선택, `commit`은 로컬 기록 저장, `push`는 원격 반영, `clone`은 저장소 복제, `pull`은 원격 변경 수신·통합, `checkout`은 브랜치 전환에 사용합니다. 병합은 `merge`로 수행합니다. 복제 실습 및 새 로컬 저장소의 `init` 결과는 실습 로그에 남겼습니다.
 
 저장소 URL: https://github.com/duly-208129/mission2
+
+복제 실습 확인 (2026-11-16): 별도 clone에서 이 문장을 추가하여 commit·push한 뒤 기존 작업 폴더에서 pull하여 반영을 확인했습니다.
