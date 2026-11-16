@@ -103,6 +103,8 @@ py docs/testing/test_requirements.py
 
 테스트는 임시 폴더에서 실행하며 사용자 `state.json`을 변경하지 않습니다. 메뉴, 100점 채점, 재실행 후 최고 점수·등록 문제 유지, 목록, 삭제를 검사했습니다. 추가로 빈 입력·손상 데이터·힌트 감점·Ctrl+C·EOF·쓰기 실패 등 7개 테스트가 통과했습니다.
 
+문제 수 검증 기준은 **기본 6문제 → 테스트 문제 1개 추가 후 7문제 → 해당 문제 삭제 후 6문제**입니다. 현재 공개 브랜치의 문서와 테스트도 이 기준을 사용합니다. 과거 커밋과 Git 그래프의 변경 내역은 당시 기록으로 보존합니다.
+
 - [기능 검증 요약](docs/testing/09-summary.txt)
 - [예외 처리 테스트](docs/testing/requirements-results.txt)
 - [환경 확인 화면](docs/testing/environment.png)

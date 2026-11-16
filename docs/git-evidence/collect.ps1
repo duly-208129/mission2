@@ -11,8 +11,8 @@ try {
         & git @GitArgs 2>&1 | ForEach-Object { Write-Host "$_" }
         if ($LASTEXITCODE -ne 0) { throw "git failed: $LASTEXITCODE" }
     }
-    Invoke-GitEvidence -GitArgs @('clone', '--branch', 'master', 'https://github.com/duly-208129/mission2.git', $checkout)
-    Invoke-GitEvidence -GitArgs @('-C', $checkout, 'pull', '--ff-only', 'origin', 'master')
+    Invoke-GitEvidence -GitArgs @('clone', '--branch', 'main', 'https://github.com/duly-208129/mission2.git', $checkout)
+    Invoke-GitEvidence -GitArgs @('-C', $checkout, 'pull', '--ff-only', 'origin', 'main')
     Invoke-GitEvidence -GitArgs @('-C', $checkout, 'branch', '-a')
     Invoke-GitEvidence -GitArgs @('-C', $checkout, 'log', '--all', '--oneline', '--decorate', '--graph')
     Invoke-GitEvidence -GitArgs @('-C', $checkout, 'rev-list', '--count', 'origin/master')
