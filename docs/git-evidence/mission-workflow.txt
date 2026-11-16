@@ -1,0 +1,73 @@
+﻿**********************
+Windows PowerShell 기록 시작
+시작 시간: 20261116135122
+사용자 이름: DESKTOP-H013KFF\k'
+RunAs 사용자: DESKTOP-H013KFF\k'
+구성 이름: 
+Machine: DESKTOP-H013KFF (Microsoft Windows NT 10.0.26300.0)
+호스트 응용 프로그램: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath docs/git-evidence/mission-workflow.txt -Force
+$practicePath = Join-Path (Get-Location) 'docs/git-evidence/remote-checkout-init-20261116'
+Write-Output 'PS> git init <isolated practice directory>'
+git init $practicePath
+$clonePath = Join-Path (Get-Location) 'docs/git-evidence/remote-checkout-mission-20261116'
+Write-Output 'PS> git clone --branch main https://github.com/duly-208129/mission2.git <separate directory>'
+git clone --branch main https://github.com/duly-208129/mission2.git $clonePath
+if ($LASTEXITCODE -ne 0) { throw 'clone failed' }
+Write-Output 'PS> append mission-required README exercise note in clone'
+Add-Content -LiteralPath (Join-Path $clonePath 'README.md') -Value "`n복제 실습 확인 (2026-11-16): 별도 clone에서 이 문장을 추가하여 commit·push한 뒤 기존 작업 폴더에서 pull하여 반영을 확인했습니다." -Encoding UTF8
+Write-Output 'PS> git -C <clone> add README.md'
+git -C $clonePath add README.md
+Write-Output 'PS> git -C <clone> commit -m "docs: record round-trip clone and pull exercise"'
+git -C $clonePath commit -m "docs: record round-trip clone and pull exercise"
+if ($LASTEXITCODE -ne 0) { throw 'commit failed' }
+Write-Output 'PS> git -C <clone> push origin main'
+git -C $clonePath push origin main
+if ($LASTEXITCODE -ne 0) { throw 'push failed' }
+Write-Output 'PS> git pull --ff-only origin main (original workspace)'
+git pull --ff-only origin main
+if ($LASTEXITCODE -ne 0) { throw 'pull failed' }
+Select-String -LiteralPath README.md -Pattern '복제 실습 확인'
+Write-Output 'PS> git log --oneline --graph --decorate -20'
+git log --oneline --graph --decorate -20
+Write-Output 'PS> git rev-list --count main'
+git rev-list --count main
+Write-Output 'PS> git log --merges --oneline'
+git log --merges --oneline
+Stop-Transcript
+프로세스 ID: 12356
+PSVersion: 5.1.26100.9818
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9818
+BuildVersion: 10.0.26100.9818
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+기록이 시작되었습니다. 출력 파일은 docs/git-evidence/mission-workflow.txt입니다.
+PS> git init <isolated practice directory>
+
+PS> git clone --branch main https://github.com/duly-208129/mission2.git <separate directory>
+
+PS> append mission-required README exercise note in clone
+PS> git -C <clone> add README.md
+
+PS> git -C <clone> commit -m "docs: record round-trip clone and pull exercise"
+
+PS> git -C <clone> push origin main
+
+PS> git pull --ff-only origin main (original workspace)
+
+
+README.md:127:복제 실습 확인 (2026-11-16): 별도 clone에서 이 문장을 추가하여 commit·push한 뒤 기존 작업 폴더에서 pull하여 반영을 확인했습니다.
+PS> git log --oneline --graph --decorate -20
+
+PS> git rev-list --count main
+
+PS> git log --merges --oneline
+
+**********************
+Windows PowerShell 기록 끝
+종료 시간: 20261116135130
+**********************

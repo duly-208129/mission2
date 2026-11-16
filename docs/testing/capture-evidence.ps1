@@ -1,4 +1,6 @@
 # Capture a dedicated window containing unedited command output, not the desktop.
+Add-Type 'using System.Runtime.InteropServices; public class EvidenceDpi { [DllImport("user32.dll")] public static extern bool SetProcessDPIAware(); }'
+[EvidenceDpi]::SetProcessDPIAware() | Out-Null
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 $files = @('01-python', '02-git', '04-menu', '05-quiz', '06-restart', '07-add', '08-delete', '09-summary', '10-list', 'environment', 'git-graph')
@@ -18,6 +20,8 @@ foreach ($name in $files) {
     $box.Text = [IO.File]::ReadAllText($path) -replace "`r?`n", "`r`n"
     $form.Controls.Add($box)
     $form.Show()
+    $box.SelectionStart = 0
+    $box.SelectionLength = 0
     $form.Activate()
     [System.Windows.Forms.Application]::DoEvents()
     Start-Sleep -Milliseconds 350

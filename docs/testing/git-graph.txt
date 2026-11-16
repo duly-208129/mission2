@@ -1,0 +1,22 @@
+﻿PS> git log --oneline --graph --decorate -20
+* d7dd306 (HEAD -> main, origin/main, origin/HEAD) docs: record round-trip clone and pull exercise
+* ce72200 docs: map mission requirements to validated code and submission evidence
+*   4faaa52 merge: retain legacy main history with validated root project layout
+|\  
+| * 08dfd23 (github-main) Remove obsolete space quiz backup instructions and reset history data
+| * f1003f0 docs: add local test commands, results and captures to README section 8.3
+| * 96bacec Finalize K-History Kids Adventure project
+| * 56b9ed1 Project Init
+*   1ccd699 merge: integrate mission input validation and regression tests
+|\  
+| * a445a50 (origin/fix/mission-requirements, fix/mission-requirements) test: verify six-question gameplay persistence and error recovery
+| * f0180c0 fix: validate saved quiz data and reprompt empty answers
+|/  
+* ca80f98 (origin/master, master) docs: preserve updated six-question guide and local play record
+* 3be18d0 refactor: reduce default quizzes from twelve to six
+* 62d0976 docs: remove obsolete space quiz migration step
+* a7c8026 docs: address evaluation feedback and add Git evidence
+* a5bfa8d docs: update README
+* 1ac39f4 Remove obsolete space quiz backup instructions and reset history data
+PS> git rev-list --count main
+16
