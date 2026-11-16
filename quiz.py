@@ -12,11 +12,16 @@ class Quiz:
     level: str
 
     def __post_init__(self):
+        if not all(isinstance(value, str) and value.strip() for value in
+                   (self.question, self.hint, self.explanation, self.category, self.level)):
+            raise ValueError('문제와 부가 정보는 비어 있지 않은 문자열이어야 합니다.')
+        if not isinstance(self.choices, list) or any(not isinstance(c, str) for c in self.choices):
+            raise ValueError('선택지는 문자열 목록이어야 합니다.')
         if not self.question.strip() or len(self.choices) != 4:
             raise ValueError('문제와 4개 선택지가 필요합니다.')
         if any(not str(choice).strip() for choice in self.choices):
             raise ValueError('선택지는 비어 있을 수 없습니다.')
-        if self.answer not in (1, 2, 3, 4):
+        if type(self.answer) is not int or self.answer not in (1, 2, 3, 4):
             raise ValueError('정답은 1~4여야 합니다.')
 
     def to_dict(self):
