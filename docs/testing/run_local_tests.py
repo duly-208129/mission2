@@ -40,7 +40,7 @@ with tempfile.TemporaryDirectory(prefix='k_history_quiz_') as directory:
     # A fixed seed selects the same question; the actual CLI still runs unchanged.
     output = run('05-quiz.txt', '테스트 2: 역사/초급 1문제 정답 및 채점',
                  [sys.executable, '-c', "import random, runpy; random.seed(0); runpy.run_path('main.py', run_name='__main__')"],
-                 '1\n2\n1\n1\n3\n7\n')
+                 '1\n1\n1\n1\n3\n7\n')
     assert '최종 100점' in output
     output = run('06-restart.txt', '테스트 3: 새 프로세스에서 최고 점수 및 기록 조회',
                  [sys.executable, 'main.py'], '5\n6\n7\n')
@@ -48,16 +48,18 @@ with tempfile.TemporaryDirectory(prefix='k_history_quiz_') as directory:
     run('07-add.txt', '테스트 4: 문제 추가', [sys.executable, 'main.py'],
         '2\n로컬 테스트 전용 문제\n선택지1\n선택지2\n선택지3\n선택지4\n1\n테스트 힌트\n테스트 해설\n역사\n1\n7\n')
     state = json.loads((work / 'state.json').read_text(encoding='utf-8'))
-    assert len(state['quizzes']) == 13 and state['quizzes'][-1]['question'] == '로컬 테스트 전용 문제'
-    run('08-delete.txt', '테스트 5: 추가한 13번 문제 삭제', [sys.executable, 'main.py'], '4\n13\ny\n7\n')
+    assert len(state['quizzes']) == 7 and state['quizzes'][-1]['question'] == '로컬 테스트 전용 문제'
+    output = run('10-list.txt', '추가한 문제의 재실행 후 목록 조회', [sys.executable, 'main.py'], '3\n7\n')
+    assert '로컬 테스트 전용 문제' in output
+    run('08-delete.txt', '테스트 5: 추가한 7번 문제 삭제', [sys.executable, 'main.py'], '4\n7\ny\n7\n')
     state = json.loads((work / 'state.json').read_text(encoding='utf-8'))
-    assert len(state['quizzes']) == 12
+    assert len(state['quizzes']) == 6
     assert all(q['question'] != '로컬 테스트 전용 문제' for q in state['quizzes'])
     assert state['best_score'] == 100 and state['history'][-1]['score'] == 100
     assert hashlib.sha256((ROOT / 'state.json').read_bytes()).hexdigest() == original
     summary = ('PASS: 메뉴 표시 및 종료\nPASS: 정답 채점 100점\n'
-               'PASS: 재실행 후 최고 점수 및 기록 유지\nPASS: 추가 후 JSON 13문제\n'
-               'PASS: 삭제 후 JSON 12문제\nPASS: 원본 state.json SHA-256 동일\n'
+               'PASS: 재실행 후 최고 점수 및 기록 유지\nPASS: 추가 후 JSON 7문제 및 목록 유지\n'
+               'PASS: 삭제 후 JSON 6문제\nPASS: 원본 state.json SHA-256 동일\n'
                f'SHA-256: {original}\n')
     (OUT / '09-summary.txt').write_text(summary, encoding='utf-8')
     print(summary)
