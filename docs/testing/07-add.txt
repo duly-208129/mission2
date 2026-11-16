@@ -1,6 +1,6 @@
 테스트 4: 문제 추가
-실행 시각: 2026-11-16T13:47:47.583852+09:00
-작업 폴더: C:\Users\k'\AppData\Local\Temp\k_history_quiz_pxi8zz7c
+실행 시각: 2026-11-17T07:55:57.790964+09:00
+작업 폴더: C:\Users\k'\AppData\Local\Temp\k_history_quiz_q8ss1v67
 PS> C:\Users\k'\AppData\Local\Python\pythoncore-3.15-64\python.exe main.py
 표준 입력(줄 순서): '2\n로컬 테스트 전용 문제\n선택지1\n선택지2\n선택지3\n선택지4\n1\n테스트 힌트\n테스트 해설\n역사\n1\n7\n'
 

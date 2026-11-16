@@ -81,6 +81,40 @@ class Requirements(unittest.TestCase):
             self.assertFalse(self.game.save_state())
         self.assertIn('저장 실패', self.output.getvalue())
 
+    def test_read_failure_and_invalid_encoding(self):
+        self.game.path.write_bytes(b'\xff\xfe\x00')
+        self.game.load_state()
+        self.assertEqual(len(self.game.quizzes), 6)
+        self.assertIn('저장 데이터 오류', self.output.getvalue())
+        for method in ('exists', 'read_text'):
+            with self.subTest(method=method):
+                with patch.object(Path, method, side_effect=PermissionError('denied')):
+                    self.game.load_state()
+                self.assertEqual(len(self.game.quizzes), 6)
+                self.assertEqual(self.game.best_score, 0)
+                self.assertEqual(self.game.history, [])
+
+    def test_interrupt_during_add_and_play(self):
+        self.game.load_state()
+        for menu in ('1', '2'):
+            for error in (KeyboardInterrupt, EOFError):
+                with self.subTest(menu=menu, error=error):
+                    with patch('builtins.input', side_effect=[menu, error()]):
+                        self.game.run()
+                    self.game.load_state()
+                    self.assertEqual(len(self.game.quizzes), 6)
+                    self.assertEqual(self.game.history, [])
+
+    def test_wrong_answer_and_best_score_retained(self):
+        self.game.quizzes = [default_quizzes()[0]]
+        self.game.best_score = 100
+        with patch('builtins.input', side_effect=['0', '0', '1', '1']):
+            self.game.play()
+        self.game.load_state()
+        self.assertEqual(self.game.best_score, 100)
+        self.assertEqual(self.game.history[-1]['score'], 0)
+        self.assertEqual(self.game.history[-1]['correct'], 0)
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

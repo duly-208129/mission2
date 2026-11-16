@@ -1,12 +1,15 @@
 test_empty_and_unplayed (test_requirements.Requirements.test_empty_and_unplayed) ... ok
 test_input_validation (test_requirements.Requirements.test_input_validation) ... ok
+test_interrupt_during_add_and_play (test_requirements.Requirements.test_interrupt_during_add_and_play) ... ok
 test_invalid_question_types (test_requirements.Requirements.test_invalid_question_types) ... ok
 test_missing_and_corrupt_storage (test_requirements.Requirements.test_missing_and_corrupt_storage) ... ok
 test_play_reprompts_and_hint_score_persists (test_requirements.Requirements.test_play_reprompts_and_hint_score_persists) ... ok
+test_read_failure_and_invalid_encoding (test_requirements.Requirements.test_read_failure_and_invalid_encoding) ... ok
 test_safe_interrupt_and_eof (test_requirements.Requirements.test_safe_interrupt_and_eof) ... ok
 test_write_failure (test_requirements.Requirements.test_write_failure) ... ok
+test_wrong_answer_and_best_score_retained (test_requirements.Requirements.test_wrong_answer_and_best_score_retained) ... ok
 
 ----------------------------------------------------------------------
-Ran 7 tests in 0.067s
+Ran 10 tests in 0.144s
 
 OK

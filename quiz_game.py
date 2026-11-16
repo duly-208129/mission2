@@ -15,11 +15,11 @@ class QuizGame:
         self.load_state()
 
     def load_state(self):
-        if not self.path.exists():
-            self.quizzes = self.defaults.copy()
-            self.save_state()
-            return
         try:
+            if not self.path.exists():
+                self.quizzes = self.defaults.copy()
+                self.save_state()
+                return
             data = json.loads(self.path.read_text(encoding='utf-8'))
             if not isinstance(data, dict) or not isinstance(data.get('quizzes'), list):
                 raise ValueError('저장 데이터 구조 오류')
@@ -32,7 +32,7 @@ class QuizGame:
             self.history = data.get('history', [])
             if not isinstance(self.history, list) or not 0 <= self.best_score <= 100:
                 raise ValueError('저장 데이터 값 오류')
-        except (OSError, ValueError, TypeError, KeyError) as exc:
+        except (OSError, UnicodeError, ValueError, TypeError, KeyError) as exc:
             print(f'저장 데이터 오류: {exc}')
             print('원본 파일은 유지하고 기본 문제로 시작합니다. 백업 후 파일을 점검하세요.')
             self.quizzes = self.defaults.copy()
