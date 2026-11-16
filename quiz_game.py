@@ -21,9 +21,15 @@ class QuizGame:
             return
         try:
             data = json.loads(self.path.read_text(encoding='utf-8'))
+            if not isinstance(data, dict) or not isinstance(data.get('quizzes'), list):
+                raise ValueError('저장 데이터 구조 오류')
+            if any(not isinstance(q, dict) for q in data['quizzes']):
+                raise ValueError('문제 데이터 구조 오류')
+            if type(data.get('best_score')) is not int:
+                raise ValueError('최고 점수는 정수여야 합니다.')
             self.quizzes = [Quiz.from_dict(q) for q in data['quizzes']]
             self.best_score = int(data['best_score'])
-            self.history = data['history']
+            self.history = data.get('history', [])
             if not isinstance(self.history, list) or not 0 <= self.best_score <= 100:
                 raise ValueError('저장 데이터 값 오류')
         except (OSError, ValueError, TypeError, KeyError) as exc:
@@ -90,7 +96,7 @@ class QuizGame:
                 print(f'{j}. {choice}')
             hint = False
             while True:
-                entry = input('정답 1~4 / H 힌트 / Enter 건너뛰기: ').strip()
+                entry = input('정답 1~4 / H 힌트: ').strip()
                 if entry.lower()=='h':
                     if hint:
                         print('힌트는 한 번만 사용할 수 있습니다.')
@@ -99,12 +105,12 @@ class QuizGame:
                         hint=True
                     continue
                 if entry=='':
-                    answer=None
-                    break
+                    print('빈 답은 입력할 수 없습니다. 1~4 또는 H를 입력하세요.')
+                    continue
                 if entry in ('1','2','3','4'):
                     answer=int(entry)
                     break
-                print('1~4, H 또는 Enter를 입력하세요.')
+                print('1~4 또는 H를 입력하세요.')
             gained=q.score(answer,hint)
             total+=gained
             if answer==q.answer:
@@ -151,6 +157,11 @@ class QuizGame:
             self.save_state()
             print('삭제되었습니다.')
 
+    def show_score(self):
+        if not self.history and self.best_score == 0:
+            print('아직 완료한 게임이 없습니다.')
+        print('최고 점수:', self.best_score)
+
     def run(self):
         try:
             while True:
@@ -162,7 +173,7 @@ class QuizGame:
                 elif choice==2:self.add()
                 elif choice==3:self.show()
                 elif choice==4:self.delete()
-                elif choice==5:print('최고 점수:',self.best_score)
+                elif choice==5:self.show_score()
                 elif choice==6:
                     if not self.history:print('기록이 없습니다.')
                     for record in self.history:print(record)
