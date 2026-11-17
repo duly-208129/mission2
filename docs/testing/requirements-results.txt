@@ -10,6 +10,6 @@ test_write_failure (test_requirements.Requirements.test_write_failure) ... ok
 test_wrong_answer_and_best_score_retained (test_requirements.Requirements.test_wrong_answer_and_best_score_retained) ... ok
 
 ----------------------------------------------------------------------
-Ran 10 tests in 0.144s
+Ran 10 tests in 0.079s
 
 OK

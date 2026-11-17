@@ -27,6 +27,7 @@ with tempfile.TemporaryDirectory(prefix='k_history_quiz_') as directory:
         if inputs is not None:
             transcript += '표준 입력(줄 순서): ' + repr(inputs) + '\n'
         transcript += result.stdout + result.stderr + f'\n종료 코드: {result.returncode}\n'
+        transcript = '\n'.join(line.rstrip() for line in transcript.split('\n'))
         (OUT / filename).write_text(transcript, encoding='utf-8')
         print(transcript)
         assert result.returncode == 0, filename
@@ -38,15 +39,17 @@ with tempfile.TemporaryDirectory(prefix='k_history_quiz_') as directory:
     output = run('04-menu.txt', '테스트 1: 메뉴 표시 및 종료', [sys.executable, 'main.py'], '7\n')
     assert '종료합니다.' in output
     # A fixed seed selects the same question; the actual CLI still runs unchanged.
-    output = run('05-quiz.txt', '테스트 2: 역사/초급 1문제 정답 및 채점',
+    output = run('05-quiz.txt', '테스트 2: 역사/초급 전체 3문제 정답 및 채점',
                  [sys.executable, '-c', "import random, runpy; random.seed(0); runpy.run_path('main.py', run_name='__main__')"],
-                 '1\n1\n1\n1\n3\n7\n')
-    assert '최종 100점' in output
+                 '1\n1\n3\n3\n2\n7\n')
+    assert '결과: 3문제 / 정답 3개 / 획득 30점' in output
+    assert '최종 ' not in output and '출제 문제 수(' not in output
+    assert '분야 선택:' not in output and '전체' not in output and '고급' not in output
     output = run('06-restart.txt', '테스트 3: 새 프로세스에서 최고 점수 및 기록 조회',
                  [sys.executable, 'main.py'], '5\n6\n7\n')
     assert '최고 점수: 100' in output and "'score': 100" in output
     run('07-add.txt', '테스트 4: 문제 추가', [sys.executable, 'main.py'],
-        '2\n로컬 테스트 전용 문제\n선택지1\n선택지2\n선택지3\n선택지4\n1\n테스트 힌트\n테스트 해설\n역사\n1\n7\n')
+        '2\n로컬 테스트 전용 문제\n선택지1\n선택지2\n선택지3\n선택지4\n1\n테스트 힌트\n테스트 해설\n1\n7\n')
     state = json.loads((work / 'state.json').read_text(encoding='utf-8'))
     assert len(state['quizzes']) == 7 and state['quizzes'][-1]['question'] == '로컬 테스트 전용 문제'
     output = run('10-list.txt', '추가한 문제의 재실행 후 목록 조회', [sys.executable, 'main.py'], '3\n7\n')

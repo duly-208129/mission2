@@ -75,18 +75,14 @@ class QuizGame:
         if not self.quizzes:
             print('등록된 문제가 없습니다.')
             return
-        categories = ['전체'] + sorted({q.category for q in self.quizzes})
-        print('\n분야 선택:', ', '.join(f'{i}.{c}' for i,c in enumerate(categories)))
-        category = categories[self.number('분야 번호: ',0,len(categories)-1)]
-        levels = ['전체','초급','중급','고급']
-        print('난이도 선택:', ', '.join(f'{i}.{x}' for i,x in enumerate(levels)))
-        level = levels[self.number('난이도 번호: ',0,3)]
-        pool = [q for q in self.quizzes if (category=='전체' or q.category==category)
-                and (level=='전체' or q.level==level)]
+        levels = ['초급','중급']
+        print('\n난이도 선택:', ', '.join(f'{i}.{x}' for i,x in enumerate(levels,1)))
+        level = levels[self.number('난이도 번호: ',1,2)-1]
+        pool = [q for q in self.quizzes if q.category=='역사' and q.level==level]
         if not pool:
             print('조건에 맞는 문제가 없습니다.')
             return
-        count = self.number(f'출제 문제 수(1~{len(pool)}): ',1,len(pool))
+        count = len(pool)
         questions = random.sample(pool,count)
         total = 0
         correct = 0
@@ -121,22 +117,21 @@ class QuizGame:
             print('해설:',q.explanation)
             print(f'이번 문제 {gained}점')
         score=round(total/(count*10)*100)
-        print(f'\n결과: {count}문제 / 정답 {correct}개 / 획득 {total}점 / 최종 {score}점')
+        print(f'\n결과: {count}문제 / 정답 {correct}개 / 획득 {total}점')
         self.best_score=max(self.best_score,score)
         self.history.append({'played_at':datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                             'category':category,'level':level,'questions':count,
+                             'category':'역사','level':level,'questions':count,
                              'correct':correct,'score':score})
         self.save_state()
 
     def add(self):
         question=self.text('문제: ')
         choices=[self.text(f'{i}번 선택지: ') for i in range(1,5)]
-        answer=self.number('정답 번호(1~4): ',1,4)
+        answer=self.number('정답 번호(1~4): ',1,7)
         hint=self.text('힌트: ')
         explanation=self.text('해설: ')
-        category=self.text('분야(예: 역사/문화): ')
-        level=['초급','중급','고급'][self.number('난이도(1 초급, 2 중급, 3 고급): ',1,3)-1]
-        self.quizzes.append(Quiz(question,choices,answer,hint,explanation,category,level))
+        level=['초급','중급'][self.number('난이도(1 초급, 2 중급): ',1,2)-1]
+        self.quizzes.append(Quiz(question,choices,answer,hint,explanation,'역사',level))
         self.save_state()
         print('문제가 추가되었습니다.')
 

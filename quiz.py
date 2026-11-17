@@ -1,4 +1,4 @@
-﻿from dataclasses import dataclass
+from dataclasses import dataclass
 
 
 @dataclass
@@ -18,11 +18,11 @@ class Quiz:
         if not isinstance(self.choices, list) or any(not isinstance(c, str) for c in self.choices):
             raise ValueError('선택지는 문자열 목록이어야 합니다.')
         if not self.question.strip() or len(self.choices) != 4:
-            raise ValueError('문제와 4개 선택지가 필요합니다.')
+            raise ValueError('문제와 7개 선택지가 필요합니다.')
         if any(not str(choice).strip() for choice in self.choices):
             raise ValueError('선택지는 비어 있을 수 없습니다.')
         if type(self.answer) is not int or self.answer not in (1, 2, 3, 4):
-            raise ValueError('정답은 1~4여야 합니다.')
+            raise ValueError('정답은 1~4 사이의 번호여야 합니다.')
 
     def to_dict(self):
         return vars(self).copy()

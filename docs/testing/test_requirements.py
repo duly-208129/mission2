@@ -54,7 +54,7 @@ class Requirements(unittest.TestCase):
 
     def test_play_reprompts_and_hint_score_persists(self):
         self.game.quizzes = [default_quizzes()[0]]
-        with patch('builtins.input', side_effect=['0', '0', '1', '', 'abc', '0', 'H', 'H', ' 2 ']):
+        with patch('builtins.input', side_effect=['1', '', 'abc', '0', 'H', 'H', ' 2 ']):
             self.game.play()
         self.assertIn('빈 답', self.output.getvalue())
         self.assertEqual(self.game.best_score, 70)
@@ -108,7 +108,7 @@ class Requirements(unittest.TestCase):
     def test_wrong_answer_and_best_score_retained(self):
         self.game.quizzes = [default_quizzes()[0]]
         self.game.best_score = 100
-        with patch('builtins.input', side_effect=['0', '0', '1', '1']):
+        with patch('builtins.input', side_effect=['1', '1']):
             self.game.play()
         self.game.load_state()
         self.assertEqual(self.game.best_score, 100)

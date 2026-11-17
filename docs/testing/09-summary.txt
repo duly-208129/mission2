@@ -4,4 +4,4 @@ PASS: 재실행 후 최고 점수 및 기록 유지
 PASS: 추가 후 JSON 7문제 및 목록 유지
 PASS: 삭제 후 JSON 6문제
 PASS: 원본 state.json SHA-256 동일
-SHA-256: c3403e62e127440205110361c22f60181de1b8bf6ab9062eda0f209cfead177a
+SHA-256: 5da4064d877e954679249c3cfeb83908ff11c69d57626817f8e92f7646fc5a3d
